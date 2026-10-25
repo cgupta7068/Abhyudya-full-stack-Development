@@ -24,6 +24,7 @@ function SignInForm() {
   useEffect(() => {}, []);
 
   const onSubmit = async (data) => {
+    console.log("Submitting Sign In Form with data:", data);
     try {
       setClicked(true);
       console.log(import.meta.env.VITE_BACKEND_API_URL);

@@ -4,9 +4,6 @@ const { User } = require("../Models/User");
 
 dotenv.config();
 
-
-
-
 const generateOTP = () => {
   return Math.floor(1000 + Math.random() * 9000).toString();
 };
@@ -19,23 +16,18 @@ const transporter = nodemailer.createTransport({
     user: process.env.USERMAIL,
     pass: process.env.USERPASS,
   },
-
-
-
 });
 
 // Send OTP
 const Send = async (req, res) => {
   try {
     const email = req.body.email?.trim().toLowerCase();
-    console.log("Received email for OTP:", email);
 
     if (!email) {
       return res.status(400).json({ message: "Email is required." });
     }
 
     const user = await User.findOne({ email });
-    console.log("User found:", user);   
 
     if (user) {
       return res.status(409).json({

@@ -114,7 +114,10 @@ const registerUser = async (req, res) => {
 // Login User
 const Login = async (req, res) => {
   try {
+    //console.log("Request came into login function");
     const { email, ABH_ID, password } = req.body;
+
+   // console.log("Login request body:", req.body);
 
     if ((!email && !ABH_ID) || !password) {
       return res
