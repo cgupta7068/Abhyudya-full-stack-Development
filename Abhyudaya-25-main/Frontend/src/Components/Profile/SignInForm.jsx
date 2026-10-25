@@ -20,25 +20,23 @@ function SignInForm() {
     resolver: zodResolver(signInSchema),
   });
   const dispatch = useDispatch();
-  
+
   useEffect(() => {}, []);
 
-
-  // finding the error 
+  // finding the error
   const onSubmit = async (data) => {
     console.log("Submitting Sign In Form with data:", data);
     try {
       setClicked(true);
       console.log(import.meta.env.VITE_BACKEND_API_URL);
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_API_URL}users/login`,
-        data,
-        {
-          withCredentials: true, // This sends cookies to backend
-        }
-      );
-      
-      dispatch(setUser( res.data.data )); // Dispatch user data to Redux
+
+      const BASE_URL = import.meta.env.VITE_BACKEND_API_URL.replace(/\/+$/, "");
+
+      const res = await axios.post(`${BASE_URL}/users/login`, data, {
+        withCredentials: true,
+      });
+
+      dispatch(setUser(res.data.data)); // Dispatch user data to Redux
       dispatch(fetchEvents());
       toast.success(`Welcome ${res.data.data.fullName}`);
     } catch (error) {
