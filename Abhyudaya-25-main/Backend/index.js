@@ -23,7 +23,7 @@ const app = express();
 // Make sure the deployed URL is your actual FRONTEND URL.
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://abhyudya-full-stack-development.onrender.com",
+  process.env.DEPLOYED_URL
 ].map((origin) => origin.trim().replace(/\/+$/, ""));
 
 // CORS configuration
